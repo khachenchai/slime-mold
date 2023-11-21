@@ -15,6 +15,7 @@ def BFS(m, start=None):
 
     while len(frontier) > 0:
         currCell = frontier.popleft()
+        # print(m._goal)
         if currCell == m._goal:
             break
         for d in 'ESNW':
@@ -33,22 +34,27 @@ def BFS(m, start=None):
                 explored.append(childCell)
                 bfsPath[childCell] = currCell
                 bSearch.append(childCell)
+                # print(bSearch[-1])
     fwdPath = {}
     cell = m._goal
     while cell != (m.rows,m.cols):
         fwdPath[bfsPath[cell]] = cell
         cell = bfsPath[cell]
+        print(cell)
     return bSearch, bfsPath, fwdPath
 
-if __name__=='__main__':
-    m = maze(rowsAmount, colsAmount)
-    m.CreateMaze(loopPercent=10, theme='light')
-    bSearch,bfsPath,fwdPath=BFS(m)
-    a=agent(m,footprints=True, color=COLOR.blue, shape='square',filled=True)
-    b=agent(m,footprints=True, color=COLOR.red, shape='square',filled=False)
-    c=agent(m,1,1,footprints=True, color=COLOR.cyan, shape='square', filled=True, goal=(m.rows,m.cols))
-    m.tracePath({a:bSearch}, delay=100)
-    m.tracePath({c:bfsPath}, delay=100)
-    m.tracePath({b:fwdPath}, delay=100)
 
-    m.run()
+m = maze(rowsAmount, colsAmount)
+m.CreateMaze(loopPercent=10, theme='light')
+bSearch,bfsPath,fwdPath=BFS(m)
+a=agent(m,footprints=True, color=COLOR.blue, shape='square',filled=True)
+b=agent(m,footprints=True, color=COLOR.red, shape='square',filled=False)
+c=agent(m,1,1,footprints=True, color=COLOR.cyan, shape='square', filled=True, goal=(m.rows,m.cols))
+m.tracePath({a:bSearch}, delay=100)
+m.tracePath({c:bfsPath}, delay=100)
+m.tracePath({b:fwdPath}, delay=100)
+print(bfsPath)
+
+l=textLabel(m,'Length of Shortest Path',len(bfsPath)+1)
+
+m.run()

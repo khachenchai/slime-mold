@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <center>
+        <p>สามารถใช้ปุ่มลูกศรเพื่อย้ายไปรอบๆ</p>
+        <div class="container">
+            <div id="time">
+                <span class="digit" id="hr">
+                    00</span>
+                <span class="txt">Hr </span>
+                <span class="digit"> :</span>
+                <span class="digit" id="min">
+                    00</span>
+                <span class="txt">Min </span>
+                <span class="digit"> :</span>
+                <span class="digit" id="sec">
+                    00</span>
+                <span class="txt">Sec </span>
+                <span class="digit"> :</span>
+                <span class="digit" id="count">
+                    00</span>
+            </div>
+            <div id="buttons">
+                <!-- <button class="btn" id="start">
+                    Start</button> -->
+                <button class="btn" id="stop" style="display: none;">
+                    Stop</button>
+                <button class="btn" id="reset" style="display: none;">
+                    Reset</button>
+            </div>
+            <div style="margin-top: -16px; justify-content: space-evenly; display: flex; padding: 0 32rem;">
+                <button onclick="maze.solve();" id="start">Solve</button>
+                <button onclick="maze.reset();">Reset</button>
+            </div>
+            <div>
+                <div id="grid"></div>
+            </div>
+        </div>
+    </center>
+
+
+
+    <script src="./script.js"></script>
+
+    <script>
+        window.onload = function () {
+            window.maze = new Maze({
+                gridElement: document.getElementById('grid'),
+                gridSize: new Point(10, 10),
+                blockSize: 50,
+                onSolved: function () {
+                    setTimeout(function () { alert('A maze ing!'); }, 200);
+                }
+            });
+            maze.reset();
+        }
+
+
+    </script>
+</body>
+
+</html>
