@@ -58,5 +58,3 @@ if __name__=='__main__':
     l=textLabel(m,'Length of Shortest Path',len(bfsPath)+1)
 
     m.run()
-
-    print(m.maze_map)
